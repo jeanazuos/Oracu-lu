@@ -8,7 +8,7 @@
 from pymongo import MongoClient
 
 class MongoDBPipeline(object):
-
+    collection_name = 'deal-of-day'
     def __init__(self):
 
         mongo_collection = 'deal-of-day'
@@ -18,20 +18,21 @@ class MongoDBPipeline(object):
         mongo_username = 'admin'
         mongo_password = 'admin123'
 
-        self.conn = MongoClient(
-            mongo_uri,
-            mongo_port,
-            username = mongo_username,
-            password = mongo_password
+    def open_spider(self, spider):
+        self.client = MongoClient(
+            '127.0.0.1',
+            27017,
+            username = 'admin',
+            password = 'admin123'
         )
-
-        db = self.conn['luiza-deal']
-        self.mycol = db[mongo_collection]
+        self.db = self.client['luiza-deal']
+    
 
 
     #insert to db
     def set_data(self, item):
-        self.mycol.insert(dict(item))
+        self.db[self.collection_name].insert(dict(item))
+        # self.mycol.insert(dict(item))
 
 #criar o desconnect do banco
 
