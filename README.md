@@ -13,13 +13,6 @@ Utilizando o framwork Scrapy, o programa permite acessar a url de ofertas do dia
     - Crie um ambiente de desenvolvimento do python com uma versão 3.5+ (virtualenv);
     - Através do pip instale as dependências do requirements.txt EX: "pip install -r requirements.txt";
     - Insira as credênciais de seu mongodb server no arquivo .env (subistitua a informação do .env atual por suas informações);
-        Ex:
-            MONGO_COLLECTION=abc
-            MONGO_URI=000.0.0.0
-            MONGO_DATABASE=abcd
-            MONGO_PORT=0000
-            MONGO_USER=abc
-            MONGO_PASS=abc
 
     - Atualize as váriaveis de ambiente "set -a; source .env; set +a"; (rode este comando no mesmo diretório do arquivo .env);
     - Acesse o diretório: 'luizaScraper/';
