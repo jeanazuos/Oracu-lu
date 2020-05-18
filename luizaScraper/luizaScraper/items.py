@@ -8,4 +8,4 @@
 import scrapy
 
 class LuizascraperItem(scrapy.Item):
-    desc= scrapy.Field()
+    desc = scrapy.Field()
