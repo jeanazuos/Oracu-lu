@@ -1,41 +1,35 @@
 # -*- coding: utf-8 -*-
 
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-
 from pymongo import MongoClient
+import os
 
 class MongoDBPipeline(object):
-    collection_name = 'deal-of-day'
-    def __init__(self):
 
-        mongo_collection = 'deal-of-day'
-        mongo_uri = '127.0.0.1'
-        mongo_db = 'luiza-deal'
-        mongo_port = 27017
-        mongo_username = 'admin'
-        mongo_password = 'admin123'
+    mongo_collection_name = os.environ.get('MONGO_COLLECTION')
+    mongo_uri = os.environ.get('MONGO_URI')
+    mongo_db = os.environ.get('MONGO_DATABASE')
+    mongo_port = int(os.environ.get('MONGO_PORT'))
+    mongo_user = os.environ.get('MONGO_USER')
+    mongo_pass = os.environ.get('MONGO_PASS')
+
+    def __init__(self):
+        pass
 
     def open_spider(self, spider):
         self.client = MongoClient(
-            '127.0.0.1',
-            27017,
-            username = 'admin',
-            password = 'admin123'
+            self.mongo_uri,
+            self.mongo_port,
+            username = self.mongo_user,
+            password = self.mongo_pass
         )
-        self.db = self.client['luiza-deal']
-    
+        self.db = self.client[self.mongo_db]
 
-
-    #insert to db
-    def set_data(self, item):
-        self.db[self.collection_name].insert(dict(item))
-        # self.mycol.insert(dict(item))
-
-#criar o desconnect do banco
+    def close_spider(self, spider):
+        self.client.close()
 
     def process_item(self, item, spider):
         self.set_data(item)
         return item
+  
+    def set_data(self, item):
+        self.db[self.mongo_collection_name].insert(dict(item))
