@@ -1,7 +1,7 @@
 # Este projeto foi desenvolvido para fins didáticos
 
 # O que ele faz?
-Utilizando o framwork Scrapy, o programa permite acessar a url de ofertas do dia do Magazine Luiza e persistir as informações em banco mongoDB.
+Utilizando o framework Scrapy, o programa permite acessar a url de ofertas do dia do Magazine Luiza e persistir as informações em banco mongoDB.
 
 # Dependências:
     * Python 3.5+ (Recomendo o uso de virtualenv)
